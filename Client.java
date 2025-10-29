@@ -18,12 +18,9 @@ public class Client {
       ServerListener listener = new ServerListener(in);
       new Thread(listener).start();
 
-      String userInput;
-      while ((userInput = consoleReader.readLine()) != null) {
-        out.println(userInput);
-
-        if ("/quit".equalsIgnoreCase(userInput))
-          break;
+      String message;
+      while ((message = consoleReader.readLine()) != null) {
+        out.println(message);
       }
 
     } catch (UnknownHostException e) {
@@ -51,7 +48,6 @@ class ServerListener implements Runnable {
 
     } catch (IOException e) {
       System.out.println("Disconnected from server: " + e.getMessage());
-
     }
 
   }
