@@ -24,6 +24,7 @@ class Server implements Runnable {
       String message = in.readLine();
       String clientNickname = message;
       out.println(clientNickname + " joined the chat.");
+      message = in.readLine();
 
       while (message != null) {
         String trimmedMessage = message.trim();
