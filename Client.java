@@ -6,6 +6,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client {
+  final static String MOVE_UP = "\033[1A";
+  final static String CLEAR_LINE = "\033[2K";
+
   public static void main(String[] args) {
     String host = "127.0.0.1";
     int port = 8080;
@@ -20,6 +23,7 @@ public class Client {
 
       String message;
       while ((message = consoleReader.readLine()) != null) {
+        System.out.println(MOVE_UP + CLEAR_LINE);
         out.println(message);
       }
 
@@ -29,6 +33,7 @@ public class Client {
       System.out.println("Input/Output exception: " + e.getMessage());
     }
   }
+
 }
 
 class ServerListener implements Runnable {
