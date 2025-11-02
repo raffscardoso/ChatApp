@@ -31,6 +31,11 @@ class Server implements Runnable {
     }
   }
 
+  public void removeClient(ClientHandler clientHandler) {
+    clients.remove(clientHandler);
+    System.out.println("Client " + clientHandler.getClientNickname() + " removed.");
+  }
+
   public static void main(String[] args) {
     Server s = new Server();
     new Thread(s).start();

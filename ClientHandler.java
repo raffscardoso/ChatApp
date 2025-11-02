@@ -40,9 +40,6 @@ public class ClientHandler implements Runnable {
           this.clientNickname = newNickaname;
 
         } else if (trimmedMessage.startsWith("/quit")) {
-          System.out.println("Client " + clientSocket.getRemoteSocketAddress() + " wants to leave.");
-          server.broadcast(clientNickname + " quit.", this);
-          clientSocket.close();
           break;
         } else {
           server.broadcast(this.clientNickname + ": " + trimmedMessage, this);
@@ -52,7 +49,22 @@ public class ClientHandler implements Runnable {
     } catch (IOException e) {
       System.err.println("Error on ClientHandler: " + e.getMessage());
     } finally {
+      if (clientNickname != null) {
+        server.broadcast(clientNickname + " has left the chat", this);
+      }
+      server.removeClient(this);
+      try {
+        in.close();
+        out.close();
+        clientSocket.close();
+      } catch (IOException e) {
+        System.err.println("Error closing client elements: " + e.getMessage());
+      }
     }
+  }
+
+  public String getClientNickname() {
+    return this.clientNickname;
   }
 
   public void sendMessage(String message) {
