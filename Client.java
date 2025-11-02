@@ -23,7 +23,6 @@ public class Client {
 
       String message;
       while ((message = consoleReader.readLine()) != null) {
-        System.out.println(MOVE_UP + CLEAR_LINE);
         out.println(message);
       }
 
@@ -54,7 +53,5 @@ class ServerListener implements Runnable {
     } catch (IOException e) {
       System.out.println("Disconnected from server: " + e.getMessage());
     }
-
   }
-
 }
