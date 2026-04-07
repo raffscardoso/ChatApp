@@ -1,15 +1,19 @@
-import java.io.*;
-import java.net.*;
+package com.chatapp.server;
+
+import com.chatapp.shared.ChatDefaults;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-class Server implements Runnable {
+public class Server implements Runnable {
 
-  private List<ClientHandler> clients = new CopyOnWriteArrayList<>();
+  private final List<ClientHandler> clients = new CopyOnWriteArrayList<>();
 
   @Override
   public void run() {
-    int port = 8080;
+    int port = ChatDefaults.DEFAULT_PORT;
     try (ServerSocket server = new ServerSocket(port)) {
       while (true) {
         Socket client = server.accept();

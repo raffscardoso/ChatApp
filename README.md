@@ -2,44 +2,50 @@
 
 This is a simple command-line chat application built in Java.
 
-## Description
+## Project Structure
 
-The project consists of two main components:
+The project now uses a Maven multi-module layout:
 
-* **Server:** A multi-threaded server that listens for client connections and broadcasts messages to all connected clients.
-* **Client:** A command-line client that connects to the server and allows users to send and receive messages.
+- `shared`: common constants and shared code used by client and server.
+- `server`: server runtime and client connection handling.
+- `client`: command-line chat client.
+
+## Requirements
+
+- Java 17+
+- Maven 3.9+
 
 ## How to Run
 
-1. **Compile the code:**
+1. **Compile all modules:**
 
-    ```bash
-    javac Server.java Client.java
-    ```
+   ```bash
+   mvn clean compile
+   ```
 
 2. **Start the server:**
 
-    ```bash
-    java Server
-    ```
+   ```bash
+   mvn -pl server exec:java
+   ```
 
 3. **Start the client:**
-    Open a new terminal and run:
+   Open another terminal and run:
 
-    ```bash
-    java Client
-    ```
+   ```bash
+   mvn -pl client exec:java
+   ```
 
-    You can start multiple clients to chat with each other.
+   You can start multiple clients to chat with each other.
 
 ## How to Use
 
-* Upon connecting, you will be prompted to enter a nickname.
-* Type your message and press `Enter` to send it to the chat.
-* To change your nickname, use the `/nick` command:
+- Upon connecting, you will be prompted to enter a nickname.
+- Type your message and press `Enter` to send it to the chat.
+- To change your nickname, use the `/nick` command:
 
-    ```
-    /nick <new_nickname>
-    ```
+  ```
+  /nick <new_nickname>
+  ```
 
-* To quit the chat, use the `/quit` command.
+- To quit the chat, use the `/quit` command.
